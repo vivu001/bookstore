@@ -1,7 +1,7 @@
-package com.example.bookstore.OderDetail;
+package com.example.bookstore.oderDetail;
 
-import com.example.bookstore.Order.Order;
-import com.example.bookstore.Order.OrderRepo;
+import com.example.bookstore.order.Order;
+import com.example.bookstore.order.OrderRepo;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

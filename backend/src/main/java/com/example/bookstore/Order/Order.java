@@ -1,4 +1,4 @@
-package com.example.bookstore.Order;
+package com.example.bookstore.order;
 
 
 import com.example.bookstore.user.User;
@@ -6,7 +6,7 @@ import com.example.bookstore.user.User;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "\"Order\"")   /* escape SQL reserved keywords */
+@Table(name = "\"order\"")   /* escape SQL reserved keywords */
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,4 +1,4 @@
-package com.example.bookstore.OderDetail;
+package com.example.bookstore.oderDetail;
 
 import org.springframework.web.bind.annotation.*;
 

@@ -1,6 +1,6 @@
-package com.example.bookstore.OderDetail;
+package com.example.bookstore.oderDetail;
 
-import com.example.bookstore.Order.Order;
+import com.example.bookstore.order.Order;
 import com.example.bookstore.book.Book;
 
 import javax.persistence.*;

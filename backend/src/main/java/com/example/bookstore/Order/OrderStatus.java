@@ -1,4 +1,4 @@
-package com.example.bookstore.Order;
+package com.example.bookstore.order;
 
 enum OrderStatus {
     PAID,

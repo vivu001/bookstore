@@ -1,4 +1,4 @@
-package com.example.bookstore.Order;
+package com.example.bookstore.order;
 
 import com.example.bookstore.user.User;
 import com.example.bookstore.user.UserRepo;
