@@ -1,0 +1,40 @@
+package com.example.bookstore.user;
+
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/users")
+public class UserController {
+    private UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
+
+    @GetMapping("")
+    public List<User> getAllUsers() {
+        return this.userService.getAllUsers();
+    }
+
+    @GetMapping("/{userId}")
+    public User getAnUser(@PathVariable int userId) {
+        return this.userService.getAnUser(userId);
+    }
+
+    @PostMapping("")
+    public User createUser(@RequestBody User user) {
+        return this.userService.createUser(user);
+    }
+
+    @PutMapping("/{userId}")
+    public User updateUser(@RequestBody User user, @PathVariable int userId) {
+        return this.userService.updateUser(user, userId);
+    }
+
+    @DeleteMapping("/{userId}")
+    public User deleteUser(@PathVariable int userId) {
+        return this.userService.deleteUser(userId);
+    }
+}
