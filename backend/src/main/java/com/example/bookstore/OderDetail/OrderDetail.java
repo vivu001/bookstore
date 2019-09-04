@@ -14,10 +14,21 @@ public class OrderDetail {
     private int quantity;
 
     @ManyToOne
+    @JoinColumn(name = "book_id")
     private Book book;
 
     @ManyToOne
+    @JoinColumn(name = "order_id")
     private Order order;
+
+    public OrderDetail() {
+    }
+
+    public OrderDetail(int quantity, Book book, Order order) {
+        this.quantity = quantity;
+        this.book = book;
+        this.order = order;
+    }
 
     public int getId() {
         return id;

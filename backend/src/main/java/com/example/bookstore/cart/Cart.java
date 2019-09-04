@@ -26,6 +26,16 @@ public class Cart {
 
     private int quantity;
 
+    public Cart() {
+    }
+
+    public Cart(User user, Book book, int quantity) {
+        id = new CartKey(user.getId(), book.getId());
+        this.user = user;
+        this.book = book;
+        this.quantity = quantity;
+    }
+
     public CartKey getId() {
         return id;
     }

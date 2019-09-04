@@ -30,7 +30,7 @@ public class User {
 
     @JsonIgnore
     @OneToMany(mappedBy = "user")
-    private Set<Cart> quantities;
+    private Set<Cart> cartQuantities;
 
     public User() {
     }
@@ -100,11 +100,11 @@ public class User {
         this.email = email;
     }
 
-    public Set<Cart> getQuantities() {
-        return quantities;
+    public Set<Cart> getCartQuantities() {
+        return cartQuantities;
     }
 
-    public void setQuantities(Set<Cart> quantities) {
-        this.quantities = quantities;
+    public void setCartQuantities(Set<Cart> quantities) {
+        this.cartQuantities = quantities;
     }
 }

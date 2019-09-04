@@ -1,10 +1,12 @@
 package com.example.bookstore.order;
 
 
+import com.example.bookstore.cart.Cart;
 import com.example.bookstore.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "\"order\"")   /* escape SQL reserved keywords */
@@ -21,9 +23,9 @@ public class Order {
     @Enumerated(EnumType.STRING)
     private PaymentMethod payment;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    @JsonIgnore
     private User user;
 
     public Order() {
@@ -75,5 +77,4 @@ public class Order {
     public void setUser(User user) {
         this.user = user;
     }
-
 }

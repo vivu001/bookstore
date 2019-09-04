@@ -1,6 +1,7 @@
 package com.example.bookstore.book;
 
 import com.example.bookstore.cart.Cart;
+import com.example.bookstore.oderDetail.OrderDetail;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -21,7 +22,7 @@ public class Book {
 
     @JsonIgnore
     @OneToMany(mappedBy = "book")
-    private Set<Cart> quantities;
+    private Set<Cart> cartQuantities;
 
     public Book() {
     }
@@ -91,11 +92,11 @@ public class Book {
         this.price = price;
     }
 
-    public Set<Cart> getQuantities() {
-        return quantities;
+    public Set<Cart> getCartQuantities() {
+        return cartQuantities;
     }
 
-    public void setQuantities(Set<Cart> quantities) {
-        this.quantities = quantities;
+    public void setCartQuantities(Set<Cart> quantities) {
+        this.cartQuantities = quantities;
     }
 }
