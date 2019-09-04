@@ -16,7 +16,7 @@ public class BookService {
         return (List<Book>) this.bookRepo.findAll();
     }
 
-    public Book getBook(int bookId) {
+    public Book getBook(Long bookId) {
         return this.bookRepo.findById(bookId).get();
     }
 
@@ -24,12 +24,12 @@ public class BookService {
         return this.bookRepo.save(book);
     }
 
-    public Book updateBook(Book book, int bookId) {
+    public Book updateBook(Book book, Long bookId) {
         book.setId(bookId);
         return this.bookRepo.save(book);
     }
 
-    public Book deleteBook(int bookId) {
+    public Book deleteBook(Long bookId) {
         Book book = this.getBook(bookId);
         this.bookRepo.deleteById(bookId);
         return book;

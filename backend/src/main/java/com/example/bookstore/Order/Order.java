@@ -2,6 +2,7 @@ package com.example.bookstore.order;
 
 
 import com.example.bookstore.user.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 
@@ -10,7 +11,7 @@ import javax.persistence.*;
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     private String date;
 
@@ -21,13 +22,25 @@ public class Order {
     private PaymentMethod payment;
 
     @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    @JsonIgnore
     private User user;
 
-    public int getId() {
+    public Order() {
+    }
+
+    public Order(String date, OrderStatus status, PaymentMethod payment, User user) {
+        this.date = date;
+        this.status = status;
+        this.payment = payment;
+        this.user = user;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

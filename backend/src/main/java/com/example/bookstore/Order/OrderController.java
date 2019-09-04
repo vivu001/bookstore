@@ -18,7 +18,7 @@ public class OrderController {
     }
 
     @GetMapping("/users/{userId}/orders")
-    public List<Order> getOrdersOfUser(@PathVariable int userId) {
+    public List<Order> getOrdersOfUser(@PathVariable Long userId) {
         return this.orderService.getOrdersOfUser(userId);
     }
 
@@ -28,13 +28,18 @@ public class OrderController {
     }
 
     @PostMapping("/users/{userId}/orders")
-    public Order createOrder(@PathVariable int userId, @RequestBody Order order) {
+    public Order createOrder(@PathVariable Long userId, @RequestBody Order order) {
         return this.orderService.createOrder(userId, order);
     }
 
     @PutMapping("/orders/{orderId}")
     public Order updateOrder(@PathVariable int orderId, @RequestBody Order order) {
         return this.orderService.updateOrder(orderId, order);
+    }
+
+    @DeleteMapping("/users/{userId}/orders")
+    public List<Order> deleteOrdersOfUser(@PathVariable Long userId) {
+        return this.orderService.deleteOrdersOfUser(userId);
     }
 
     @DeleteMapping("/orders")

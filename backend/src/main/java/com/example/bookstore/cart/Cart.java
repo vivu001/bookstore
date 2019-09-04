@@ -2,27 +2,35 @@ package com.example.bookstore.cart;
 
 import com.example.bookstore.book.Book;
 import com.example.bookstore.user.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 
 @Entity
 public class Cart {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
 
+    @EmbeddedId
+    private CartKey id;
+
+    @JsonIgnore
     @ManyToOne
+    @MapsId("user_id")
+    @JoinColumn(name = "user_id")
     private User user;
+
+    @JsonIgnore
     @ManyToOne
+    @MapsId("book_id")
+    @JoinColumn(name = "book_id")
     private Book book;
 
     private int quantity;
 
-    public int getId() {
+    public CartKey getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(CartKey id) {
         this.id = id;
     }
 

@@ -1,6 +1,6 @@
 package com.example.bookstore.order;
 
-enum OrderStatus {
+public enum OrderStatus {
     PAID,
     PROCESSING,
     DELIVERED,

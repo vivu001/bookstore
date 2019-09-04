@@ -20,7 +20,7 @@ public class OrderService {
         return (List<Order>) this.orderRepo.findAll();
     }
 
-    public List<Order> getOrdersOfUser(int userId) {
+    public List<Order> getOrdersOfUser(Long userId) {
         User user = this.userRepo.findById(userId).get();
         return this.orderRepo.findAllByUser(user);
     }
@@ -29,7 +29,7 @@ public class OrderService {
         return this.orderRepo.findById(orderId).get();
     }
 
-    public Order createOrder(int userId, Order order) {
+    public Order createOrder(Long userId, Order order) {
         User user = this.userRepo.findById(userId).get();
         order.setUser(user);
         return this.orderRepo.save(order);
@@ -39,6 +39,13 @@ public class OrderService {
         Order oldOrder = this.orderRepo.findById(orderId).get();
         order.setId(oldOrder.getId());
         return this.orderRepo.save(oldOrder);
+    }
+
+    public List<Order> deleteOrdersOfUser(Long userId) {
+        User user = this.userRepo.findById(userId).get();
+        List<Order> orders = this.getOrdersOfUser(userId);
+        this.orderRepo.deleteAllByUser(user);
+        return orders;
     }
 
     public List<Order> deleteAllOrders() {

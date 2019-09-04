@@ -1,12 +1,16 @@
 package com.example.bookstore.book;
 
+import com.example.bookstore.cart.Cart;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     private String title;
     private String publisher;
@@ -15,11 +19,27 @@ public class Book {
     private String isbn;
     private Double price;
 
-    public int getId() {
+    @JsonIgnore
+    @OneToMany(mappedBy = "book")
+    private Set<Cart> quantities;
+
+    public Book() {
+    }
+
+    public Book(String title, String publisher, String author, String year, String isbn, Double price) {
+        this.title = title;
+        this.publisher = publisher;
+        this.author = author;
+        this.year = year;
+        this.isbn = isbn;
+        this.price = price;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -69,5 +89,13 @@ public class Book {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public Set<Cart> getQuantities() {
+        return quantities;
+    }
+
+    public void setQuantities(Set<Cart> quantities) {
+        this.quantities = quantities;
     }
 }

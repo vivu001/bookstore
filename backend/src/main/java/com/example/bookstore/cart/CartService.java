@@ -23,38 +23,37 @@ public class CartService {
         return (List<Cart>) this.cartRepo.findAll();
     }
 
-    public List<Cart> getAllCartsOfUser(int userId) {
+    public List<Cart> getAllCartsOfUser(Long userId) {
         User user = this.userRepo.findById(userId).get();
         return (List<Cart>) this.cartRepo.findCartsByUser(user);
     }
 
-    public Cart addCard(int userId, Cart cart, int bookId, int quantity) {
-        cart.setUser(userRepo.findById(userId).get());
-        cart.setBook(bookRepo.findById(bookId).get());
-        cart.setQuantity(quantity);
-        return this.cartRepo.save(cart);
-    }
-
-    public Cart updateCart(int userId, int cartId, Cart cart, int bookId, int quantity) {
+    public Cart addCard(Long userId, Cart cart, Long bookId, int quantity) {
+        CartKey cartId = new CartKey(userId, bookId);
         cart.setId(cartId);
-        cart.setUser(userRepo.findById(userId).get());
-        cart.setBook(bookRepo.findById(bookId).get());
         cart.setQuantity(quantity);
         return this.cartRepo.save(cart);
     }
 
-    public Cart deleteCart(int cartId) {
+    public Cart updateCart(Long userId, Cart cart, Long bookId, int quantity) {
+        CartKey cartId = new CartKey(userId, bookId);
+        cart.setId(cartId);
+        cart.setQuantity(quantity);
+        return this.cartRepo.save(cart);
+    }
+
+    public Cart deleteCart(Long userId, Long bookId) {
+        CartKey cartId = new CartKey(userId, bookId);
         Cart cart = this.cartRepo.findById(cartId).get();
-        this.cartRepo.delete(cart);
+        this.cartRepo.deleteById(cartId);
         return cart;
     }
 
-    public List<Cart> deleteAllCartsOfUser(int userId) {
+    public List<Cart> deleteAllCartsOfUser(Long userId) {
         User user = this.userRepo.findById(userId).get();
         List<Cart> carts = this.cartRepo.findCartsByUser(user);
-        for (Cart cart : carts) {
-            this.cartRepo.delete(cart);
-        }
+        this.cartRepo.deleteAllByUser(user);
         return carts;
     }
 }
+

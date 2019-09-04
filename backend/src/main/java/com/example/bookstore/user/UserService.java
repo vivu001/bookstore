@@ -16,7 +16,7 @@ public class UserService {
         return (List<User>) this.userRepo.findAll();
     }
 
-    public User getAnUser(int userId) {
+    public User getAnUser(Long userId) {
         return this.userRepo.findById(userId).get();
     }
 
@@ -24,12 +24,12 @@ public class UserService {
         return this.userRepo.save(user);
     }
 
-    public User updateUser(User user, int userId) {
+    public User updateUser(User user, Long userId) {
         user.setId(userId);
         return this.userRepo.save(user);
     }
 
-    public User deleteUser(int userId) {
+    public User deleteUser(Long userId) {
         User user = this.getAnUser(userId);
         this.userRepo.delete(user);
         return user;
