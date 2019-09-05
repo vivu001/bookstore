@@ -2,6 +2,7 @@ package com.example.bookstore.book;
 
 import com.example.bookstore.cart.Cart;
 import com.example.bookstore.oderDetail.OrderDetail;
+import com.example.bookstore.stock.Stock;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -21,8 +22,16 @@ public class Book {
     private Double price;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "book")
+    @OneToMany(mappedBy = "book", cascade = CascadeType.REMOVE)
     private Set<Cart> cartQuantities;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "book", cascade = CascadeType.REMOVE)
+    private Set<OrderDetail> orderDetails;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "book", cascade = CascadeType.REMOVE)
+    private Set<Stock> stockQuantities;
 
     public Book() {
     }
@@ -98,5 +107,13 @@ public class Book {
 
     public void setCartQuantities(Set<Cart> quantities) {
         this.cartQuantities = quantities;
+    }
+
+    public Set<Stock> getStockQuantities() {
+        return stockQuantities;
+    }
+
+    public void setStockQuantities(Set<Stock> stockQuantities) {
+        this.stockQuantities = stockQuantities;
     }
 }

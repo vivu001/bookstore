@@ -1,15 +1,18 @@
 package com.example.bookstore.address;
 
+import com.example.bookstore.cart.Cart;
 import com.example.bookstore.user.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-//@Table(name = "\"address\"")   /* escape SQL reserved keywords */
+@Table(name = "\"address\"")   /* escape SQL reserved keywords */
 public class Address {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     private String street;
     private String houseNo;
@@ -17,25 +20,28 @@ public class Address {
     private String city;
     private String country;
 
-    @OneToOne(mappedBy = "address")
+    @JsonIgnore
+    @OneToOne(cascade = CascadeType.REMOVE)
+    @MapsId
     private User user;
 
     public Address() {
     }
 
-    public Address(String street, String houseNo, String postcode, String city, String country) {
+    public Address(String street, String houseNo, String postcode, String city, String country, User user) {
         this.street = street;
         this.houseNo = houseNo;
         this.postcode = postcode;
         this.city = city;
         this.country = country;
+        this.user = user;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

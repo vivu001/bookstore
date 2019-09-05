@@ -2,6 +2,7 @@ package com.example.bookstore.order;
 
 
 import com.example.bookstore.cart.Cart;
+import com.example.bookstore.oderDetail.OrderDetail;
 import com.example.bookstore.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -27,6 +28,10 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "order", cascade = CascadeType.REMOVE)
+    private Set<OrderDetail> oderDetails;
 
     public Order() {
     }

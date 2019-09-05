@@ -23,13 +23,13 @@ public class CartController {
     }
 
     @PostMapping("/users/{userId}/carts/books/{bookId}/{quantity}")
-    public Cart addCard(@PathVariable Long userId, @RequestBody Cart cart, @PathVariable Long bookId, @PathVariable int quantity) {
-        return this.cartService.addCard(userId, cart, bookId, quantity);
+    public Cart addCart(@PathVariable Long userId, @PathVariable Long bookId, @PathVariable int quantity) {
+        return this.cartService.addCart(userId, bookId, quantity);
     }
 
     @PutMapping("/users/{userId}/carts/books/{bookId}/{quantity}")
-    public Cart updateCart(@PathVariable Long userId, @RequestBody Cart cart, @PathVariable Long bookId, @PathVariable int quantity) {
-        return this.cartService.updateCart(userId, cart, bookId, quantity);
+    public Cart updateCart(@PathVariable Long userId, @PathVariable Long bookId, @PathVariable int quantity) {
+        return this.cartService.updateCart(userId, bookId, quantity);
     }
 
     @DeleteMapping("/users/{userId}/carts/books/{bookId}")

@@ -16,7 +16,6 @@ public class CartKey implements Serializable {
     @Column(name = "book_id")
     private Long bookId;
 
-
     public CartKey() {
     }
 

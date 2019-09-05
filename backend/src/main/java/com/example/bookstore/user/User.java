@@ -2,6 +2,7 @@ package com.example.bookstore.user;
 
 import com.example.bookstore.address.Address;
 import com.example.bookstore.cart.Cart;
+import com.example.bookstore.order.Order;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -22,25 +23,28 @@ public class User {
 
     private String birthday;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "address_id", referencedColumnName = "id")
+    @JsonIgnore
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Address address;
 
     private String email;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private Set<Cart> cartQuantities;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    private Set<Order> orders;
 
     public User() {
     }
 
-    public User(String firstName, String lastName, Gender gender, String birthday, Address address, String email) {
+    public User(String firstName, String lastName, Gender gender, String birthday, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
         this.birthday = birthday;
-        this.address = address;
         this.email = email;
     }
 
@@ -106,5 +110,13 @@ public class User {
 
     public void setCartQuantities(Set<Cart> quantities) {
         this.cartQuantities = quantities;
+    }
+
+    public Set<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Set<Order> orders) {
+        this.orders = orders;
     }
 }

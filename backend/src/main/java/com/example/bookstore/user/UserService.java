@@ -16,7 +16,7 @@ public class UserService {
         return (List<User>) this.userRepo.findAll();
     }
 
-    public User getAnUser(Long userId) {
+    public User getUser(Long userId) {
         return this.userRepo.findById(userId).get();
     }
 
@@ -30,8 +30,8 @@ public class UserService {
     }
 
     public User deleteUser(Long userId) {
-        User user = this.getAnUser(userId);
-        this.userRepo.delete(user);
+        User user = this.getUser(userId);
+        this.userRepo.deleteById(userId);
         return user;
     }
 }

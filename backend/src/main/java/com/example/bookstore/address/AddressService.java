@@ -27,25 +27,25 @@ public class AddressService {
 
     public Address createAddress(Long userId, Address address) {
         User user = this.userRepo.findById(userId).get();
-        address.setUser(user);
+        user.setAddress(address);
         return this.addressRepo.save(address);
     }
 
     public Address updateAddress(Long userId, Address address) {
         Address oldAddress = this.getAddress(userId);
-        address.setId(address.getId());
+        address.setId(oldAddress.getId());
         return this.addressRepo.save(address);
     }
 
     public Address deleteAddress(Long userId) {
-        Address address = this.getAddress(userId);
-        this.addressRepo.delete(address);
-        return address;
+        Address oldAddress = this.getAddress(userId);
+        this.addressRepo.delete(oldAddress);
+        return oldAddress;
     }
 
     public List<Address> deleteAllAddresses() {
         List<Address> addresses = (List<Address>) this.addressRepo.findAll();
-        this.addressRepo.deleteAll();
+        this.addressRepo.deleteAll(addresses);
         return addresses;
     }
 }

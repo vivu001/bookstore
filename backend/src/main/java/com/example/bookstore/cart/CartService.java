@@ -1,10 +1,10 @@
 package com.example.bookstore.cart;
 
+import com.example.bookstore.book.Book;
 import com.example.bookstore.book.BookRepo;
 import com.example.bookstore.user.User;
 import com.example.bookstore.user.UserRepo;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -28,18 +28,16 @@ public class CartService {
         return (List<Cart>) this.cartRepo.findCartsByUser(user);
     }
 
-    public Cart addCard(Long userId, Cart cart, Long bookId, int quantity) {
-        CartKey cartId = new CartKey(userId, bookId);
-        cart.setId(cartId);
-        cart.setQuantity(quantity);
-        return this.cartRepo.save(cart);
+    public Cart addCart(Long userId, Long bookId, int quantity) {
+        User user = this.userRepo.findById(userId).get();
+        Book book = this.bookRepo.findById(bookId).get();
+        return this.cartRepo.save(new Cart(user, book, quantity));
     }
 
-    public Cart updateCart(Long userId, Cart cart, Long bookId, int quantity) {
-        CartKey cartId = new CartKey(userId, bookId);
-        cart.setId(cartId);
-        cart.setQuantity(quantity);
-        return this.cartRepo.save(cart);
+    public Cart updateCart(Long userId, Long bookId, int quantity) {
+        User user = this.userRepo.findById(userId).get();
+        Book book = this.bookRepo.findById(bookId).get();
+        return this.cartRepo.save(new Cart(user, book, quantity));
     }
 
     public Cart deleteCart(Long userId, Long bookId) {
@@ -52,8 +50,7 @@ public class CartService {
     public List<Cart> deleteAllCartsOfUser(Long userId) {
         User user = this.userRepo.findById(userId).get();
         List<Cart> carts = this.cartRepo.findCartsByUser(user);
-        this.cartRepo.deleteAllByUser(user);
-        return carts;
+        return this.cartRepo.deleteAllByUser(user);
     }
 }
 
